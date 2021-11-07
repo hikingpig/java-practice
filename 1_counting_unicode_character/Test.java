@@ -62,7 +62,7 @@ public class Test {
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
             ) {
           while (reader.read(buff) != -1) {
-            Counter.countCharacters3(buff, result);
+            Counter.countCharacters2(buff, result);
           }
           
           // measure time for 1 file

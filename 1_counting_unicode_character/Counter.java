@@ -23,15 +23,9 @@ public class Counter {
     }
   }
 
-  // obtain the codepoints directly
-  public static void countCharacter2(StringBuilder s, Map<String, Long> result) {
-    s.codePoints().mapToObj(cp -> String.valueOf(Character.toChars(cp)))
-        .forEach(key -> result.merge(key, 1L, Long::sum));
-  }
-
   // avoid generating a lot of objects by using primitive arrays
   // direct array manipulation can be unsafe and error-prone
-  public static void countCharacters3(char[] chars, int[] result) {
+  public static void countCharacters2(char[] chars, int[] result) {
     for (int i = 0; i < chars.length; i++) {
       int cp = Character.codePointAt(chars, i);
       // skip the low surrogate character
