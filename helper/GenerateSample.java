@@ -1,4 +1,4 @@
-package practice.countingUnicode;
+package practice.helper;
 
 import java.io.*;
 import java.nio.Buffer;
@@ -9,11 +9,11 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 
 public class GenerateSample {
-  private static  Random rnd = ThreadLocalRandom.current();
+  private static final Random rnd = ThreadLocalRandom.current();
   // the file size is roughly 1 million characters
-  private static int MAX_CHARS_IN_FILE = 10_000_000;
-  // the size of each line is from 0-36 character
-  private static int MAX_CHARS_IN_LINE = 36;
+  public static final int MAX_CHARS_IN_FILE = 10_000_000;
+  public static final int MAX_CHARS_IN_LINE = 36;
+  public static final int MAX_CHARS_IN_STRING = 45_000;
 
   // name patterns of unpopular codepoints
   private static String[] getBlackListedNames() {
@@ -29,10 +29,10 @@ public class GenerateSample {
         "COMBINING LATIN", "GREEK INSTRUMENTAL", "LOOPED" };
   }
 
-  private static String[] blackListedNames = getBlackListedNames();
+  private static final String[] blackListedNames = getBlackListedNames();
 
   // unpopular codepoints will be filtered out
-  private static boolean badName(String name) {
+  public static boolean badName(String name) {
     for (String s : blackListedNames) {
       if (name.contains(s)) {
         return true;
@@ -64,7 +64,7 @@ public class GenerateSample {
     return lineLength;
   }
 
-  public static void generateSample(String filename) throws IOException {
+  public static void generateSampleFile(String filename) throws IOException {
     try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filename), StandardCharsets.UTF_8))) {
       for (int i = 0; i < MAX_CHARS_IN_FILE;) {
         int n = writeRandomLine(writer);
@@ -75,6 +75,22 @@ public class GenerateSample {
         }
       }
     }
+  }
+  public static String generateSampleString() {
+    StringBuilder builder = new StringBuilder();
+    for (int i = 0; i < MAX_CHARS_IN_STRING; i++) {
+      int cp = rnd.nextInt(Character.MAX_CODE_POINT);
+      String name = Character.getName(cp);
+      // filter out unoccupied or not popular codepoints
+      if (name == null || badName(name)) {
+        i--;
+        continue;
+      }
+      // accepted codepoints will be write to file
+      char[] chars = Character.toChars(cp);
+      builder.append(chars);
+    }
+    return builder.toString();
   }
 
   public static void main(String[] args) throws IOException {
@@ -93,7 +109,7 @@ public class GenerateSample {
       long start = System.nanoTime();
 
       String filename = String.format("%s/sample_%d.txt", dir_name, i);
-      generateSample(filename);
+      generateSampleFile(filename);
 
       // measure time of one file
       System.out.format("generate sample %d took %d miliseconds%n", i, (System.nanoTime() - start)/1000000);
