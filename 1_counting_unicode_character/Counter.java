@@ -11,8 +11,9 @@ public class Counter {
   public static void countCharacters(StringBuilder buf, Map<String, Long> result) {
     for (int i = 0; i < buf.length(); i++) {
       int cp = buf.codePointAt(i);
+      // skip the remaining surrogate due to buffering
       if (i == 0 && Character.isLowSurrogate(buf.charAt(i))) {
-        System.out.println("==== LOW SURROGATE DETECTED");
+        continue;
       }
       String key = String.valueOf(Character.toChars(cp));
       if (Character.charCount(cp) == 2) {
