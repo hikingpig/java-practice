@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 public class Reverse {
     public static final String WHITESPACE = " ";
-    private static final Pattern PATTERN = Pattern.compile(" +");
+    private static final Pattern PATTERN = Pattern.compile("\\s+");
 
     public static String reverseWordsV1(String str) {
 
