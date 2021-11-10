@@ -1,8 +1,11 @@
 package practice.reverseLetters;
 
-public class Reverse {
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
+public class Reverse {
     public static final String WHITESPACE = " ";
+    private static final Pattern PATTERN = Pattern.compile(" +");
 
     public static String reverseWordsV1(String str) {
 
@@ -28,5 +31,16 @@ public class Reverse {
         }
 
         return reversedString.toString();
+    }
+
+    public static String reverseWordsV2(String str) {
+
+        // or throw IllegalArgumentException
+        if (str == null || str.isBlank()) {
+            return "";
+        }
+
+        return PATTERN.splitAsStream(str).map(w -> new StringBuilder(w).reverse())
+                .collect(Collectors.joining(WHITESPACE));
     }
 }
