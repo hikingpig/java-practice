@@ -1,7 +1,6 @@
 package practice.FirstNonRepeatedChar;
 
-import java.util.Arrays;
-import java.util.Random;
+import java.util.*;
 
 public class FunctionHome {
   public static final int EXTENDED_ASCII_CODES = 256;
@@ -111,5 +110,31 @@ public class FunctionHome {
     return position == Integer.MAX_VALUE ? "" : new String(Character.toChars(str.codePointAt(position)));
   }
 
-  
+  public static String firstNonRepeatedChar3(String str) {
+    if (str == null || str.isBlank()) {
+      // or throw IllegalArgumentException
+      return "";
+    }
+    Map<Integer, Integer> codepoints = new LinkedHashMap<>();
+
+    // or use for(char ch: str.toCharArray()) { ... }
+    for (int i = 0; i < str.length(); i++) {
+        int cp = str.codePointAt(i);
+
+        codepoints.merge(cp, 1, Integer::sum);
+        // skip the low surrogate
+        if (Character.charCount(cp) == 2) {
+          i++;
+        }
+    }
+
+    for (Map.Entry<Integer, Integer> entry : codepoints.entrySet()) {
+        if (entry.getValue() == 1) {
+            return new String(Character.toChars(entry.getKey()));
+        }
+    }
+
+    return "";
+
+  }
 }
