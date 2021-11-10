@@ -4,6 +4,7 @@ import java.io.*;
 import java.nio.Buffer;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
@@ -13,20 +14,21 @@ public class GenerateSample {
   // the file size is roughly 1 million characters
   public static final int MAX_CHARS_IN_FILE = 10_000_000;
   public static final int MAX_CHARS_IN_LINE = 36;
+  public static final int MAX_CHARS_IN_WORD = 15;
   public static final int MAX_CHARS_IN_STRING = 45_000;
-
+  public static final String WHITESPACE = " ";
   // name patterns of unpopular codepoints
   private static String[] getBlackListedNames() {
-    return new String[] { "SURROGATE", "PRIVATE", "EXTENSION", "NUSHU", "HIEROGLYPH", "TANGUT", "YI", "OLD HUNGARIAN", "CUNEIFORM",
-        "SHARADA", "HENTAIGANA", "BACKSLANTED", "LEPCHA", "EPACT", "AHOM", "MIAO", "NABATAEAN", "SIGNWRITING",
-        "MONGOLIAN", "SUNDANESE", "AEGEAN", "WARANG", "MARCHEN", "MEROITIC", "BALINESE", "MENDE", "TAI VIET",
-        "PALMYRENE", "LINEAR", "ELBASAN", "CAUCASIAN", "MINY", "REJANG", "SURROGATE", "ZANABAZAR", "SORA", "GRANTHA",
-        "SOYOMBO", "PAHAWH", "SIDDHAM", "KHUDAWADI", "BHAIKSUKI", "TIRHUTA", "TAGBANWA", "DUPLOYAN", "SAMARITAN",
-        "TAKRI", "TAKRI", "KHOJKI", "MASARAM", "BASSA", "NEW TAI", "PARTHIAN", "JAVANESE", "KAITHI", "BATAK", "MEETEI",
-        "HATRAN", "BRAHMI", "KHAROSHTHI", "PAU CIN HAU", "PHAISTOS", "MRO", "PHAGS-PA", "CHAM", "PERMIC", "TAI THAM",
-        "PSALTER", "NEWA", "SYLOTI", "LIMBU", "LYDIAN", "MODI ", "RUMI", "MANICHAEAN", "EMOJI", "MAHAJANI", "PAHLAVI",
-        "IMPERIAL", "MULTANI", "LYCIAN", "OLD COPTIC", "GREEK ACROPHONIC", "OLD NORTH", "GREEK VOCAL", "WIDE-HEADED",
-        "COMBINING LATIN", "GREEK INSTRUMENTAL", "LOOPED" };
+    return new String[] { "SURROGATE", "PRIVATE", "EXTENSION", "NUSHU", "HIEROGLYPH", "TANGUT", "YI", "OLD HUNGARIAN",
+        "CUNEIFORM", "SHARADA", "HENTAIGANA", "BACKSLANTED", "LEPCHA", "EPACT", "AHOM", "MIAO", "NABATAEAN",
+        "SIGNWRITING", "MONGOLIAN", "SUNDANESE", "AEGEAN", "WARANG", "MARCHEN", "MEROITIC", "BALINESE", "MENDE",
+        "TAI VIET", "PALMYRENE", "LINEAR", "ELBASAN", "CAUCASIAN", "MINY", "REJANG", "SURROGATE", "ZANABAZAR", "SORA",
+        "GRANTHA", "SOYOMBO", "PAHAWH", "SIDDHAM", "KHUDAWADI", "BHAIKSUKI", "TIRHUTA", "TAGBANWA", "DUPLOYAN",
+        "SAMARITAN", "TAKRI", "TAKRI", "KHOJKI", "MASARAM", "BASSA", "NEW TAI", "PARTHIAN", "JAVANESE", "KAITHI",
+        "BATAK", "MEETEI", "HATRAN", "BRAHMI", "KHAROSHTHI", "PAU CIN HAU", "PHAISTOS", "MRO", "PHAGS-PA", "CHAM",
+        "PERMIC", "TAI THAM", "PSALTER", "NEWA", "SYLOTI", "LIMBU", "LYDIAN", "MODI ", "RUMI", "MANICHAEAN", "EMOJI",
+        "MAHAJANI", "PAHLAVI", "IMPERIAL", "MULTANI", "LYCIAN", "OLD COPTIC", "GREEK ACROPHONIC", "OLD NORTH",
+        "GREEK VOCAL", "WIDE-HEADED", "COMBINING LATIN", "GREEK INSTRUMENTAL", "LOOPED" };
   }
 
   private static final String[] blackListedNames = getBlackListedNames();
@@ -40,12 +42,13 @@ public class GenerateSample {
     }
     return false;
   }
-  /* 
-  *write a line with randome length between 0-36 and return the number of characters written
-  * characters are generated from random unicode points
-  * unoccupied and unpopular codepoints are filtered out
-  */
-  private static int writeRandomLine (BufferedWriter writer) throws IOException{
+
+  /*
+   * write a line with randome length between 0-36 and return the number of
+   * characters written characters are generated from random unicode points
+   * unoccupied and unpopular codepoints are filtered out
+   */
+  private static int writeRandomLine(BufferedWriter writer) throws IOException {
     // writing a line with length from 0-36 characters
     int lineLength = rnd.nextInt(MAX_CHARS_IN_LINE);
     for (int i = 0; i < lineLength; i++) {
@@ -65,7 +68,8 @@ public class GenerateSample {
   }
 
   public static void generateSampleFile(String filename) throws IOException {
-    try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filename), StandardCharsets.UTF_8))) {
+    try (BufferedWriter writer = new BufferedWriter(
+        new OutputStreamWriter(new FileOutputStream(filename), StandardCharsets.UTF_8))) {
       for (int i = 0; i < MAX_CHARS_IN_FILE;) {
         int n = writeRandomLine(writer);
         i += n;
@@ -76,9 +80,14 @@ public class GenerateSample {
       }
     }
   }
+
   public static String generateSampleString() {
+    return generateSampleString(MAX_CHARS_IN_STRING);
+  }
+
+  public static String generateSampleString(int charNum) {
     StringBuilder builder = new StringBuilder();
-    for (int i = 0; i < MAX_CHARS_IN_STRING; i++) {
+    for (int i = 0; i < charNum; i++) {
       int cp = rnd.nextInt(Character.MAX_CODE_POINT);
       String name = Character.getName(cp);
       // filter out unoccupied or not popular codepoints
@@ -93,11 +102,42 @@ public class GenerateSample {
     return builder.toString();
   }
 
+  public static StringBuilder randomWord(StringBuilder word) {
+    Objects.requireNonNull(word);
+    word.setLength(0);
+    int charNum = rnd.nextInt(MAX_CHARS_IN_WORD);
+    for (int i = 0; i < charNum; i++) {
+      int cp = rnd.nextInt(Character.MAX_CODE_POINT);
+      String name = Character.getName(cp);
+      // filter out unoccupied or not popular codepoints
+      if (name == null || badName(name)) {
+        i--;
+        continue;
+      }
+      // accepted codepoints will be write to file
+      char[] chars = Character.toChars(cp);
+      word.append(chars);
+    }
+    return word;
+  }
+  public static String generateWords(int wordNum) {
+    if (wordNum <= 0) {
+      throw new IllegalArgumentException("wordNum <= 0");
+    }
+    StringBuilder builder = new StringBuilder();
+    StringBuilder word = new StringBuilder();
+    for (int i = 0; i < wordNum; i++) {
+      word = randomWord(word);
+      builder.append(word).append(WHITESPACE);
+    }
+    return builder.substring(0, builder.length() - 1);
+  }
+
   public static void main(String[] args) throws IOException {
     // create samples directory if not exists
     String dir_name = "samples";
     File directory = new File(dir_name);
-    if (! directory.exists()) {
+    if (!directory.exists()) {
       directory.mkdirs();
     }
 
@@ -112,10 +152,10 @@ public class GenerateSample {
       generateSampleFile(filename);
 
       // measure time of one file
-      System.out.format("generate sample %d took %d miliseconds%n", i, (System.nanoTime() - start)/1000000);
+      System.out.format("generate sample %d took %d miliseconds%n", i, (System.nanoTime() - start) / 1000000);
     }
 
     // measure total time
-    System.out.format("generate 10 files took: %d milliseconds%n", (System.nanoTime() - startTimeLoop)/1000000);
+    System.out.format("generate 10 files took: %d milliseconds%n", (System.nanoTime() - startTimeLoop) / 1000000);
   }
 }
