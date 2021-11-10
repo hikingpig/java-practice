@@ -6,4 +6,6 @@
 - find the first non-repeated character by the recorded info
 
 # performance
-- using primitive array: 600ms for 45000 characters
+- with 45,000 characters:
+  - repeated looping to record firsttime and repeated character: 600ms
+  - record first time and repeated character directly on codepoint array: 25ms
