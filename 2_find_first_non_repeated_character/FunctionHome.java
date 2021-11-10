@@ -1,20 +1,23 @@
 package practice.FirstNonRepeatedChar;
 
 import java.util.*;
+import static java.util.stream.Collectors.*;
 
 public class FunctionHome {
   public static final int EXTENDED_ASCII_CODES = 256;
+
   private static int[] ensureCapacity(int[] array, int pos) {
     if (pos >= array.length - 1) {
       return Arrays.copyOf(array, 2 * array.length + 1);
     }
     return array;
   }
+
   // this method adds characters as they appear
   // save the size of array to store all codepoints
   // but will pay the cost of more iteration
   public static String firstNonRepeatedChar(String s) {
-    
+
     if (s == null || s.isBlank()) {
       // or throw IllegalArgumentException
       return "";
@@ -90,7 +93,7 @@ public class FunctionHome {
       // first time encounter character, assign value -1
       if (flags[cp] == -1) {
         flags[cp] = i;
-      // repeated character, assign value -2
+        // repeated character, assign value -2
       } else {
         flags[cp] = -2;
       }
@@ -119,22 +122,38 @@ public class FunctionHome {
 
     // or use for(char ch: str.toCharArray()) { ... }
     for (int i = 0; i < str.length(); i++) {
-        int cp = str.codePointAt(i);
+      int cp = str.codePointAt(i);
 
-        codepoints.merge(cp, 1, Integer::sum);
-        // skip the low surrogate
-        if (Character.charCount(cp) == 2) {
-          i++;
-        }
+      codepoints.merge(cp, 1, Integer::sum);
+      // skip the low surrogate
+      if (Character.charCount(cp) == 2) {
+        i++;
+      }
     }
 
     for (Map.Entry<Integer, Integer> entry : codepoints.entrySet()) {
-        if (entry.getValue() == 1) {
-            return new String(Character.toChars(entry.getKey()));
-        }
+      if (entry.getValue() == 1) {
+        return new String(Character.toChars(entry.getKey()));
+      }
+    }
+    return "";
+  }
+
+  public static String firstNonRepeatedChar4(String str) {
+    if (str == null || str.isBlank()) {
+      // or throw IllegalArgumentException
+      return "";
     }
 
-    return "";
+    Map<Integer, Long> chs = str.codePoints().mapToObj(cp -> cp)
+        .collect(groupingBy(cp -> cp, LinkedHashMap::new, counting()));
 
+    int firstNonRepeatedCp =
+      chs.entrySet()
+        .stream()
+        .filter(e -> e.getValue() == 1L)
+        .findFirst().map(Map.Entry::getKey)
+        .orElse(Integer.valueOf(Character.MIN_CODE_POINT));
+    return new String(Character.toChars(firstNonRepeatedCp));
   }
 }

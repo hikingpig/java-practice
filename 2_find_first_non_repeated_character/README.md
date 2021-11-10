@@ -11,3 +11,4 @@
     - repetitive looping to record firsttime and repeated character: 600ms
     - record first time and repeated character directly on codepoint array: 25ms
   - with map: 35ms
+  - with map and stream: 65ms
