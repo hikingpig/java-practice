@@ -86,6 +86,18 @@ public class GenerateSample {
     return generateSampleString(MAX_CHARS_IN_STRING);
   }
 
+  public static String getRandomChar() {
+    while (true) {
+      int cp = rnd.nextInt(Character.MAX_CODE_POINT);
+      String name = Character.getName(cp);
+      // filter out unoccupied or not popular codepoints
+      if (name == null || badName(name)) {
+        continue;
+      }
+      return new String(Character.toChars(cp));
+    }
+  }
+
   public static String generateSampleString(int charNum) {
     StringBuilder builder = new StringBuilder();
     for (int i = 0; i < charNum; i++) {
