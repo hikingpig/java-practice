@@ -133,6 +133,13 @@ public class GenerateSample {
     return builder.substring(0, builder.length() - 1);
   }
 
+  public static String generateDigits(int digitNum) {
+    StringBuilder builder = new StringBuilder();
+    for (int i = 0; i < digitNum; i++) {
+      builder.append(rnd.nextInt(10));
+    }
+    return builder.toString();
+  }
   public static void main(String[] args) throws IOException {
     // create samples directory if not exists
     String dir_name = "samples";
