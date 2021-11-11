@@ -1,6 +1,6 @@
 package practice.FirstNonRepeatedChar;
 
-import static helper.MeasurePerformance.measurePerformance;
+import static practice.helper.MeasurePerformance.measurePerformance;
 import practice.helper.GenerateSample;
 
 public class Test {

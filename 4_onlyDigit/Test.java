@@ -2,7 +2,7 @@ package practice.onlyDigit;
 
 import java.util.function.Function;
 
-import static helper.MeasurePerformance.measurePerformance;
+import static practice.helper.MeasurePerformance.measurePerformance;
 import static practice.helper.GenerateSample.*;
 
 public class Test {

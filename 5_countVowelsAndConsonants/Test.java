@@ -1,7 +1,7 @@
 package practice.VowelConsonant;
 
 import practice.helper.GenerateSample;
-import static helper.MeasurePerformance.measurePerformance;
+import static practice.helper.MeasurePerformance.measurePerformance;
 
 public class Test {
   public static void main(String[] args) {
