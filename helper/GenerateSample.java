@@ -17,6 +17,7 @@ public class GenerateSample {
   public static final int MAX_CHARS_IN_WORD = 15;
   public static final int MAX_CHARS_IN_STRING = 45_000;
   public static final String WHITESPACE = " ";
+  public static final int ASCII_CHAR_NUM = 256;
   // name patterns of unpopular codepoints
   private static String[] getBlackListedNames() {
     return new String[] { "SURROGATE", "PRIVATE", "EXTENSION", "NUSHU", "HIEROGLYPH", "TANGUT", "YI", "OLD HUNGARIAN",
@@ -140,6 +141,16 @@ public class GenerateSample {
     }
     return builder.toString();
   }
+  
+  public static String generateAsciiString(int charNum) {
+    StringBuilder builder = new StringBuilder();
+    for (int i = 0; i < charNum; i++) {
+      char c = (char) (rnd.nextInt(ASCII_CHAR_NUM));
+      builder.append(c);
+    }
+    return builder.toString();
+  }
+
   public static void main(String[] args) throws IOException {
     // create samples directory if not exists
     String dir_name = "samples";

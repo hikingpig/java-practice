@@ -1,6 +1,6 @@
 package practice.reverseLetters;
 
-import static helper.MeasurePerformance.measurePerformance;;
+import static helper.MeasurePerformance.measurePerformance;
 import practice.helper.GenerateSample;
 
 public class Test {
