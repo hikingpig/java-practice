@@ -18,16 +18,27 @@ public class OnlyDigit {
   public static boolean onlyDigit2(String str) {
 
     if (str == null || str.isBlank()) {
+      // or throw IllegalArgumentException
+      return false;
+    }
+
+    for (int i = 0; i < str.length(); i++) {
+      if (!Character.isDigit(str.charAt(i))) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  public static boolean onlyDigit3(String str) {
+
+    if (str == null || str.isBlank()) {
         // or throw IllegalArgumentException
         return false;
     }
-    
-    for (int i = 0; i < str.length(); i++) {
-        if (!Character.isDigit(str.charAt(i))) {
-            return false;
-        }
-    }
-    
-    return true;
+
+    return !str.chars()
+            .anyMatch(n -> !Character.isDigit(n));
 }
 }

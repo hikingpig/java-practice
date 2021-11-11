@@ -18,7 +18,13 @@ public class Test {
     result = measurePerformance(OnlyDigit::onlyDigit2, digits);
     System.out.println(result);
 
-    result = measurePerformance(OnlyDigit::onlyDigit, digitAndText);
+    result = measurePerformance(OnlyDigit::onlyDigit2, digitAndText);
+    System.out.println(result);
+
+    result = measurePerformance(OnlyDigit::onlyDigit3, digits);
+    System.out.println(result);
+
+    result = measurePerformance(OnlyDigit::onlyDigit3, digitAndText);
     System.out.println(result);
     
   }

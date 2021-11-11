@@ -7,6 +7,8 @@
 - With 100,000 digits
   - regex: 12ms
   - iterative: 10ms
+  - streams: 19ms
 - With 50,000 digts + text + 50,000 digits
   - regex: 4ms
-  - iterative: 4ms
+  - iterative: 2ms
+  - streams: 15ms (after the first stream text run, the 2nd may be very fast, must run them separately)
