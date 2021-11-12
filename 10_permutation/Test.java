@@ -38,10 +38,16 @@ public class Test {
     Set<String> set = measurePerformance(func, TEXT);
     System.out.println(set);
 
-    System.out.println("\nPermute and Print with Stream and String concatenation");
+    System.out.println("\nPermute and Print with Stream and char[]");
+
+    measurePerformance(Permutation::permuteAndPrintStream, TEXT);
+
+    System.out.println("\nPermute and Return with Stream and String concatenation");
+
     measurePerformance(Test::printStreamResult, TEXT);
 
-    System.out.println("\nPermute and Print with Stream and char[]");
+    System.out.println("\nPermute and Return with Stream and char[]");
+
     measurePerformance(Test::printStreamResult1, TEXT);
 
   }

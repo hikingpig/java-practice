@@ -7,5 +7,6 @@
   - print with String concatenation: 77ms
   - print with char[] 1ms
   - store with set and char[] < 1ms
-  - print with Stream and Sring concatenation 30ms
-  - print with Stream and char[] 4ms
+  - print with Stream and char[] 40ms
+  - return with Stream and Sring concatenation 30ms
+  - return with Stream and char[] 4ms
