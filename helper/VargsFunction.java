@@ -2,6 +2,6 @@ package practice.helper;
 
 @FunctionalInterface
 @SuppressWarnings("unchecked")
-public interface VargsFunction<T,R> {
-  R apply(T arg1, T... args);
+public interface VargsFunction<T, U, V> {
+  V apply(T arg1, U... args);
 }

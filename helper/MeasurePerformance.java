@@ -23,9 +23,9 @@ public class MeasurePerformance {
   }
 
   @SafeVarargs
-  public static <T,R> R measurePerformance(VargsFunction<T,R> func, T arg1, T... args) {
+  public static <T, U, V> V measurePerformance(VargsFunction<T, U, V> func, T arg1, U... args) {
     long start = System.nanoTime();
-    R result = func.apply(arg1, args);
+    V result = func.apply(arg1, args);
     System.out.format("took: %dµs%n", (System.nanoTime() - start)/NANO_IN_MICRO);
     return result;
   }
