@@ -1,5 +1,6 @@
 package practice.helper;
 
+import java.util.Collection;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -36,4 +37,6 @@ public class MeasurePerformance {
     func.accept(arg);
     System.out.format("🦄 took: %dms%n", (System.nanoTime() - start)/NANO_IN_MILI);
   }
+
+
 }
