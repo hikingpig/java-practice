@@ -10,11 +10,12 @@ public class Test {
     System.out.println(DuplicateRm.rmDuplicate(TEXT));
     System.out.println(DuplicateRm.rmDuplicate1(TEXT));
     System.out.println(DuplicateRm.rmDuplicate2(TEXT));
-
+    System.out.println(DuplicateRm.rmDuplicate3(TEXT));
     // measure performance
     String sample = GenerateSample.generateSampleString();
     measurePerformance(DuplicateRm::rmDuplicate, sample);
     measurePerformance(DuplicateRm::rmDuplicate1, sample);
     measurePerformance(DuplicateRm::rmDuplicate2, sample);
+    measurePerformance(DuplicateRm::rmDuplicate3, sample);
   }
 }

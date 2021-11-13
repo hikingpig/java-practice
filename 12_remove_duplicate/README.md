@@ -9,3 +9,4 @@
   - iterative(quadratic complexity): 95s
   - using LinkedHashSet: 57ms
   - store positions in an array: 19ms
+  - stream's distinct and joining: 36ms

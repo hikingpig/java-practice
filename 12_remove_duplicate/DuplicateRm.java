@@ -3,19 +3,18 @@ package practice.duplicate;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class DuplicateRm {
-  private static int[] ensureCapacity(int[] array, int pos) {
-    if (pos >= array.length - 1) {
-      return Arrays.copyOf(array, 2 * array.length + 1);
+  private static boolean checkInput(String str) {
+    if (str == null || str.isBlank()) {
+      return false;
     }
-    return array;
+    return true;
   }
   // quadratic complexity solution
   public static String rmDuplicate(String str) {
-    if (str == null || str.isBlank()) {
-      return "";
-    }
+    if (!checkInput(str)) return "";
 
     StringBuilder builder = new StringBuilder(str);
     StringBuilder newBuilder = new StringBuilder();
@@ -49,9 +48,7 @@ public class DuplicateRm {
 
   // Set solution
   public static String rmDuplicate1(String str) {
-    if (str == null || str.isBlank()) {
-      return "";
-    }
+    if (!checkInput(str)) return "";
 
     Set<String> set = new LinkedHashSet<>();
     for (int i = 0; i < str.length(); i++) {
@@ -69,10 +66,7 @@ public class DuplicateRm {
   }
 
   public static String rmDuplicate2(String str) {
-    if (str == null || str.isBlank()) {
-      // or throw IllegalArgumentException
-      return "";
-    }
+    if (!checkInput(str)) return "";
 
     int[] firstPositions = new int[Character.MAX_CODE_POINT];
     Arrays.fill(firstPositions, -1);
@@ -98,5 +92,12 @@ public class DuplicateRm {
       }
     }
     return builder.toString();
+  }
+
+  public static String rmDuplicate3(String str) {
+    if (!checkInput(str)) return "";
+
+    return str.codePoints().distinct().mapToObj(cp -> new String(Character.toChars(cp))).collect(Collectors.joining());
+
   }
 }
