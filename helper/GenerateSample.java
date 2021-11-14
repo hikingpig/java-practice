@@ -163,6 +163,21 @@ public class GenerateSample {
     return builder.toString();
   }
 
+  private static void swap(char[] arr, int pos1, int pos2) {
+    char tmp = arr[pos1];
+    arr[pos1] = arr[pos2];
+    arr[pos2] = tmp;
+  }
+  // use for ascii string only
+  public static String scramble (String str) {
+    char[] arr = str.toCharArray();
+    for (int i = 0; i < arr.length; i++) {
+      int pos1 = rnd.nextInt(arr.length);
+      int pos2 = rnd.nextInt(arr.length);
+      swap(arr, pos1, pos2);
+    }
+    return new String(arr);
+  }
   public static void main(String[] args) throws IOException {
     // create samples directory if not exists
     String dir_name = "samples";
