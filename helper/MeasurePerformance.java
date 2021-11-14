@@ -1,9 +1,7 @@
 package practice.helper;
 
 import java.util.Collection;
-import java.util.function.BiFunction;
-import java.util.function.Consumer;
-import java.util.function.Function;
+import java.util.function.*;
 
 import practice.helper.VargsFunction;
 
@@ -39,6 +37,12 @@ public class MeasurePerformance {
   public static <T> void measurePerformance(Consumer<T> func, T arg) {
     long start = System.nanoTime();
     func.accept(arg);
+    printDurationFrom(start);
+  }
+
+  public static <T, U> void measurePerformance(BiConsumer<T, U> func, T arg1, U arg2) {
+    long start = System.nanoTime();
+    func.accept(arg1, arg2);
     printDurationFrom(start);
   }
 }
