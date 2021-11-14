@@ -90,7 +90,7 @@ public class FunctionHome {
 
       int cp = str.codePointAt(i);
 
-      // first time encounter character, assign value -1
+      // first time encounter character, assign value i
       if (flags[cp] == -1) {
         flags[cp] = i;
         // repeated character, assign value -2
