@@ -1,6 +1,6 @@
 package practice.reverseLetters;
 
-import static practice.helper.MeasurePerformance.measurePerformance;
+import static practice.helper.MeasurePerformance.*;
 import practice.helper.GenerateSample;
 
 public class Test {
@@ -8,8 +8,8 @@ public class Test {
     String text = GenerateSample.generateWords(100000);
     // System.out.println(text1);
 
-    String result = measurePerformance(Reverse::reverseWordsV1, text);
+    String result = measureFunction(Reverse::reverseWordsV1, text);
     // System.out.println(result);
-    result = measurePerformance(Reverse::reverseWordsV2, text);
+    result = measureFunction(Reverse::reverseWordsV2, text);
   }
 }

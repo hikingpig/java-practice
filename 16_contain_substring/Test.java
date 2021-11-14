@@ -14,14 +14,14 @@ public class Test {
   private static final String SUBTEXT = "programmer";
 
   public static void main(String[] args) {
-    System.out.println(measurePerformance(TEXT::contains, SUBTEXT));
+    System.out.println(measureFunction(TEXT::contains, SUBTEXT));
 
     Function<String, Integer> indexOf = TEXT::indexOf;
-    System.out.println(measurePerformance(indexOf, SUBTEXT));
+    System.out.println(measureFunction(indexOf, SUBTEXT));
 
     // (?i): insensitive case matching
     //  .*: any character, 0 or more times
-    System.out.println(measurePerformance(TEXT::matches, "(?i).*" + Pattern.quote(SUBTEXT) + ".*"));
+    System.out.println(measureFunction(TEXT::matches, "(?i).*" + Pattern.quote(SUBTEXT) + ".*"));
 
   }
 }

@@ -11,8 +11,8 @@ public class Test {
     String str2 = GenerateSample.scramble(str1 + "      ");
 
     // measure performance
-    System.out.println(measurePerformance(Anagram::isAnagram, str1, str2));
-    System.out.println(measurePerformance(Anagram::isAnagram1, str1, str2));
-    System.out.println(measurePerformance(Anagram::isAnagram2, str1, str2));
+    System.out.println(measureBiFunction(Anagram::isAnagram, str1, str2));
+    System.out.println(measureBiFunction(Anagram::isAnagram1, str1, str2));
+    System.out.println(measureBiFunction(Anagram::isAnagram2, str1, str2));
   }
 }

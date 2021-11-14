@@ -1,6 +1,6 @@
 package practice.joinStrings;
 
-import static practice.helper.MeasurePerformance.measurePerformance;
+import static practice.helper.MeasurePerformance.measureVarargsFunction;
 
 public class Test {
 
@@ -12,22 +12,22 @@ public class Test {
 
     public static void main(String[] args) {
 
-        String result1 = measurePerformance(String::join, " ", TEXT_1, TEXT_2, TEXT_3, TEXT_4, TEXT_5);
+        String result1 = measureVarargsFunction(String::join, " ", TEXT_1, TEXT_2, TEXT_3, TEXT_4, TEXT_5);
         System.out.println("Join by String.join result1: " + result1);
 
         System.out.println();
 
-        String result2 = measurePerformance(JoinStrings::joinByDelimiterV1, ' ', TEXT_1, TEXT_2, TEXT_3, TEXT_4, TEXT_5);
+        String result2 = measureVarargsFunction(JoinStrings::joinByDelimiterV1, ' ', TEXT_1, TEXT_2, TEXT_3, TEXT_4, TEXT_5);
         System.out.println("Join by StringBuilder result: " + result2);
 
         System.out.println();
 
-        String result3 = measurePerformance(JoinStrings::joinByDelimiterV2, ' ', TEXT_1, TEXT_2, TEXT_3, TEXT_4, TEXT_5);
+        String result3 = measureVarargsFunction(JoinStrings::joinByDelimiterV2, ' ', TEXT_1, TEXT_2, TEXT_3, TEXT_4, TEXT_5);
         System.out.println("Join by streams result: " + result3);
 
         System.out.println();
         
-        String result4 = measurePerformance(JoinStrings::joinByDelimiterV3, ' ', TEXT_1, TEXT_2, TEXT_3, TEXT_4, TEXT_5);
+        String result4 = measureVarargsFunction(JoinStrings::joinByDelimiterV3, ' ', TEXT_1, TEXT_2, TEXT_3, TEXT_4, TEXT_5);
         System.out.println("Join by StringJoiner result: " + result4);
     }
 }

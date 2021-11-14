@@ -8,14 +8,14 @@ public class Test {
   "six", "seven", "eight", "nine", "ten"};
   public static void main(String[] args) {
     String[] arr1 = Arrays.copyOf(strs, strs.length);
-    measurePerformance(Sort::sortByLength, arr1, Sort.Direction.ASC);
+    measureBiConsumer(Sort::sortByLength, arr1, Sort.Direction.ASC);
     System.out.println(Arrays.toString(arr1));
 
     String[] arr2 = Arrays.copyOf(strs, strs.length);
-    measurePerformance(Sort::sortByLength1, arr2, Sort.Direction.ASC);
+    measureBiConsumer(Sort::sortByLength1, arr2, Sort.Direction.ASC);
     System.out.println(Arrays.toString(arr2));
 
-    String[] result = measurePerformance(Sort::sortByLength2, strs, Sort.Direction.ASC);
+    String[] result = measureBiFunction(Sort::sortByLength2, strs, Sort.Direction.ASC);
     System.out.println(Arrays.toString(result));
   }
 }

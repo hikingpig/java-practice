@@ -13,9 +13,9 @@ public class Test {
     System.out.println(DuplicateRm.rmDuplicate3(TEXT));
     // measure performance
     String sample = GenerateSample.generateSampleString();
-    measurePerformance(DuplicateRm::rmDuplicate, sample);
-    measurePerformance(DuplicateRm::rmDuplicate1, sample);
-    measurePerformance(DuplicateRm::rmDuplicate2, sample);
-    measurePerformance(DuplicateRm::rmDuplicate3, sample);
+    measureFunction(DuplicateRm::rmDuplicate, sample);
+    measureFunction(DuplicateRm::rmDuplicate1, sample);
+    measureFunction(DuplicateRm::rmDuplicate2, sample);
+    measureFunction(DuplicateRm::rmDuplicate3, sample);
   }
 }

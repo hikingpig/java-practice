@@ -13,19 +13,14 @@ public class Test {
     String str = new String(strChars);
     String substr = "11";
 
-    BiFunction<String, String, Integer> countSubstr = SubstringOccurence::countSubstring;
-    System.out.println(measurePerformance(countSubstr, str, substr));
+    System.out.println(measureBiFunction(SubstringOccurence::countSubstring, str, substr));
 
-    BiFunction<String, String, Integer> countSubstr1 = SubstringOccurence::countSubstring1;
-    System.out.println(measurePerformance(countSubstr1, str, substr));
+    System.out.println(measureBiFunction(SubstringOccurence::countSubstring1, str, substr));
 
-    BiFunction<String, String, Integer> countSubstr2 = SubstringOccurence::countSubstring2;
-    System.out.println(measurePerformance(countSubstr2, str, substr));
+    System.out.println(measureBiFunction(SubstringOccurence::countSubstring2, str, substr));
 
-    BiFunction<String, String, Integer> countSubstr3 = SubstringOccurence::countSubstring3;
-    System.out.println(measurePerformance(countSubstr3, str, substr));
+    System.out.println(measureBiFunction(SubstringOccurence::countSubstring3, str, substr));
     
-    BiFunction<String, String, Integer> countSubstr4 = SubstringOccurence::countSubstring4;
-    System.out.println(measurePerformance(countSubstr4, str, substr));
+    System.out.println(measureBiFunction(SubstringOccurence::countSubstring4, str, substr));
   }
 }

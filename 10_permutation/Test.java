@@ -1,6 +1,6 @@
 package practice.permutation;
 
-import static practice.helper.MeasurePerformance.measurePerformance;
+import static practice.helper.MeasurePerformance.*;
 
 import java.util.Set;
 import java.util.StringJoiner;
@@ -25,30 +25,29 @@ public class Test {
   }
   public static void main(String[] args) {
     System.out.println("Permute and Print with string concatenation:");
-    measurePerformance(Permutation::permuteAndPrint, TEXT);
+    measureConsumer(Permutation::permuteAndPrint, TEXT);
 
     System.out.println("\nPermute and Print with char[]");
 
-    measurePerformance(Permutation::permuteAndPrint1, TEXT);
+    measureConsumer(Permutation::permuteAndPrint1, TEXT);
 
     System.out.println("\nPermute and Store with Set and char[]");
     
     // must explicitly assign return type to Function
-    Function<String, Set<String>> func = Permutation::permuteAndStore;
-    Set<String> set = measurePerformance(func, TEXT);
+    Set<String> set = measureFunction(Permutation::permuteAndStore, TEXT);
     System.out.println(set);
 
     System.out.println("\nPermute and Print with Stream and char[]");
 
-    measurePerformance(Permutation::permuteAndPrintStream, TEXT);
+    measureConsumer(Permutation::permuteAndPrintStream, TEXT);
 
     System.out.println("\nPermute and Return with Stream and String concatenation");
 
-    measurePerformance(Test::printStreamResult, TEXT);
+    measureConsumer(Test::printStreamResult, TEXT);
 
     System.out.println("\nPermute and Return with Stream and char[]");
 
-    measurePerformance(Test::printStreamResult1, TEXT);
+    measureConsumer(Test::printStreamResult1, TEXT);
 
   }
 

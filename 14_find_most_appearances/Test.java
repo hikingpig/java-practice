@@ -23,8 +23,8 @@ public class Test {
     // generate sample
     String sample = GenerateSample.generateSampleString(200_000);
     // measure performance
-    System.out.println(measurePerformance(AppearanceCounter::findMostAppearances, sample));
-    System.out.println(measurePerformance(AppearanceCounter::findMostAppearances1, sample));
-    System.out.println(measurePerformance(AppearanceCounter::findMostAppearances2, sample));
+    System.out.println(measureFunction(AppearanceCounter::findMostAppearances, sample));
+    System.out.println(measureFunction(AppearanceCounter::findMostAppearances1, sample));
+    System.out.println(measureFunction(AppearanceCounter::findMostAppearances2, sample));
   }
 }

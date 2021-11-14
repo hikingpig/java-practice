@@ -15,13 +15,13 @@ public class Test {
     String sample = GenerateSample.generateSampleString();
     String ch = GenerateSample.getRandomChar();
     
-    String result = measurePerformance(CharRemover::removeChar, sample, ch);
+    String result = measureBiFunction(CharRemover::removeChar, sample, ch);
     System.out.format("remove: %d characters%n", sample.length() - result.length());
 
-    result = measurePerformance(CharRemover::removeChar1, sample, ch);
+    result = measureBiFunction(CharRemover::removeChar1, sample, ch);
     System.out.format("remove: %d characters%n", sample.length() - result.length());
 
-    result = measurePerformance(CharRemover::removeChar2, sample, ch);
+    result = measureBiFunction(CharRemover::removeChar2, sample, ch);
     System.out.format("remove: %d characters%n", sample.length() - result.length());
 
   }

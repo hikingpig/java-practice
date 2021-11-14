@@ -12,14 +12,14 @@ public class MeasurePerformance {
     long duration = System.nanoTime() - start;
     System.out.format("🦄 took: %dms(%dµs)%n", duration/NANO_IN_MILI, duration/NANO_IN_MICRO);
   }
-  public static<T,R> R measurePerformance(Function<T, R> func, T input) {
+  public static<T,R> R measureFunction(Function<T, R> func, T input) {
     long start = System.nanoTime();
     R result = func.apply(input);
     printDurationFrom(start);
     return result;
   }
 
-  public static<T,U,R> R measurePerformance(BiFunction<T,U,R> func, T arg1, U arg2) {
+  public static<T,U,R> R measureBiFunction(BiFunction<T,U,R> func, T arg1, U arg2) {
     long start = System.nanoTime();
     R result = func.apply(arg1, arg2);
     printDurationFrom(start);
@@ -27,20 +27,20 @@ public class MeasurePerformance {
   }
 
   @SafeVarargs
-  public static <T, U, V> V measurePerformance(VargsFunction<T, U, V> func, T arg1, U... args) {
+  public static <T, U, V> V measureVarargsFunction(VargsFunction<T, U, V> func, T arg1, U... args) {
     long start = System.nanoTime();
     V result = func.apply(arg1, args);
     printDurationFrom(start);
     return result;
   }
 
-  public static <T> void measurePerformance(Consumer<T> func, T arg) {
+  public static <T> void measureConsumer(Consumer<T> func, T arg) {
     long start = System.nanoTime();
     func.accept(arg);
     printDurationFrom(start);
   }
 
-  public static <T, U> void measurePerformance(BiConsumer<T, U> func, T arg1, U arg2) {
+  public static <T, U> void measureBiConsumer(BiConsumer<T, U> func, T arg1, U arg2) {
     long start = System.nanoTime();
     func.accept(arg1, arg2);
     printDurationFrom(start);

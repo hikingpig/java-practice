@@ -1,13 +1,12 @@
-package practice.Palindrome;
+package practice.palindrome;
 
 import static practice.helper.MeasurePerformance.*;
-import practice.palindrome.Palindrome;
 
 public class Test {
   private static final String TEXT = "ABCDEFEDCBA";
   public static void main(String[] args) {
-    measurePerformance(Palindrome::isPalindrome1, TEXT);
-    measurePerformance(Palindrome::isPalindrome2, TEXT);
-    measurePerformance(Palindrome::isPalindrome3, TEXT);
+    measureFunction(Palindrome::isPalindrome1, TEXT);
+    measureFunction(Palindrome::isPalindrome2, TEXT);
+    measureFunction(Palindrome::isPalindrome3, TEXT);
   }
 }
